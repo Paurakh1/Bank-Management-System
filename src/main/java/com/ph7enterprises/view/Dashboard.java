@@ -36,6 +36,7 @@ public class Dashboard extends javax.swing.JFrame {
     String opeaningDate;
     String totalTransaction;
     AccountHolder accounts;
+    DefaultTableModel tablemod;
    
     /**
      * Creates new form Dashboard
@@ -72,9 +73,9 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldDate = new javax.swing.JTextField();
         jTextFieldUserName = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonSearch = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelAddAccount = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -98,6 +99,10 @@ public class Dashboard extends javax.swing.JFrame {
         jTextFieldBalance = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jTextFieldTransaction = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -124,7 +129,7 @@ public class Dashboard extends javax.swing.JFrame {
         jTextField11 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAccountList = new javax.swing.JTable();
         jButtonDelete = new javax.swing.JButton();
@@ -155,14 +160,19 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("/Users/ace/NetBeansProjects/ph7enterprises/src/main/java/com/ph7enterprises/view/search btn.png")); // NOI18N
-        jButton1.setText("Search");
+        jButtonSearch.setBackground(new java.awt.Color(204, 204, 255));
+        jButtonSearch.setIcon(new javax.swing.ImageIcon("/Users/ace/NetBeansProjects/ph7enterprises/src/main/java/com/ph7enterprises/view/search btn.png")); // NOI18N
+        jButtonSearch.setText("Search");
+        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchActionPerformed(evt);
+            }
+        });
 
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jPanel2.setBackground(new java.awt.Color(225, 255, 238));
+        jPanelAddAccount.setBackground(new java.awt.Color(225, 255, 238));
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel3.setText("Account ID : ");
@@ -185,6 +195,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel10.setText("E-wallet : ");
 
+        jTextFieldAccountId.setEditable(false);
         jTextFieldAccountId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldAccountIdKeyPressed(evt);
@@ -194,18 +205,21 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldAddress.setEditable(false);
         jTextFieldAddress.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldAddressKeyPressed(evt);
             }
         });
 
+        jTextFieldFullName.setEditable(false);
         jTextFieldFullName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldFullNameKeyPressed(evt);
             }
         });
 
+        jTextFieldNumber.setEditable(false);
         jTextFieldNumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldNumberKeyPressed(evt);
@@ -215,11 +229,10 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxAccountType.setEditable(true);
         jComboBoxAccountType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saving", "Current", "other" }));
 
         jButtonSave.setIcon(new javax.swing.ImageIcon("/Users/ace/NetBeansProjects/ph7enterprises/src/main/java/com/ph7enterprises/view/savebtn.png")); // NOI18N
-        jButtonSave.setText("Save");
+        jButtonSave.setText("Save Account");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
@@ -234,21 +247,22 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxEwallet.setEditable(true);
         jComboBoxEwallet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paytm", "Itz pay", "Jio money", "SpeedPay" }));
 
         jLabel20.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel20.setText("Account Status:");
 
-        jComboBoxAccountStatus.setEditable(true);
         jComboBoxAccountStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive" }));
 
         jLabel22.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel22.setText("Opeaning Date :");
 
+        OpeanigDate.setEditable(false);
+
         jLabelMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabelMessage.setText("Enter All the Attributes above");
 
+        jTextFieldBalance.setEditable(false);
         jTextFieldBalance.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldBalanceKeyPressed(evt);
@@ -258,128 +272,161 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel23.setText("Total Transaction :");
 
+        jTextFieldTransaction.setEditable(false);
         jTextFieldTransaction.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextFieldTransactionKeyPressed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jButton2.setText("Add Account Or Edit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setIcon(new javax.swing.ImageIcon("/Users/ace/NetBeansProjects/ph7enterprises/src/main/java/com/ph7enterprises/view/copyright.png")); // NOI18N
+        jLabel24.setText("All the Copyright are Reserved by PH7.co");
+
+        jLabel25.setText("Developed By :- Paurakh Saud");
+
+        jLabel26.setIcon(new javax.swing.ImageIcon("/Users/ace/NetBeansProjects/ph7enterprises/src/main/java/com/ph7enterprises/view/sign.png")); // NOI18N
+
+        javax.swing.GroupLayout jPanelAddAccountLayout = new javax.swing.GroupLayout(jPanelAddAccount);
+        jPanelAddAccount.setLayout(jPanelAddAccountLayout);
+        jPanelAddAccountLayout.setHorizontalGroup(
+            jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAddAccountLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabel10))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelMessage)
                             .addComponent(jComboBoxEwallet, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jTextFieldAccountId, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                                 .addComponent(jTextFieldAddress)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel20)
-                        .addGap(17, 17, 17))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(219, 219, 219)
-                                .addComponent(jLabel5))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(173, 173, 173)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonUpdate))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(jTextFieldFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAccountType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAccountStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel23))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                            .addComponent(OpeanigDate))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                                .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 28, Short.MAX_VALUE))
+                            .addComponent(jTextFieldNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddAccountLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxAccountStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)))
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel22)
+                                    .addComponent(jLabel23))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(OpeanigDate, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonSave)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddAccountLayout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddAccountLayout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addGap(128, 128, 128))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddAccountLayout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(161, 161, 161))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelAddAccountLayout.setVerticalGroup(
+            jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAddAccountLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldAccountId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22)
-                    .addComponent(OpeanigDate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(OpeanigDate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(38, 38, 38)
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jTextFieldNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(jTextFieldBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel23)
                     .addComponent(jTextFieldTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(48, 48, 48)
+                .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jComboBoxAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxEwallet, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)
                             .addComponent(jLabel20)
-                            .addComponent(jComboBoxAccountStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBoxAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(51, 51, 51)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBoxEwallet, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10))))
+                            .addComponent(jComboBoxAccountStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelMessage)))
-                .addGap(18, 18, 18))
+                        .addComponent(jLabelMessage)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanelAddAccountLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanelAddAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonSave, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jTabbedPane1.addTab("Adding Accounts", jPanel2);
+        jTabbedPane1.addTab("Adding Accounts", jPanelAddAccount);
 
         jPanel4.setBackground(new java.awt.Color(225, 255, 238));
 
@@ -587,6 +634,11 @@ public class Dashboard extends javax.swing.JFrame {
         jTableAccountList.setGridColor(new java.awt.Color(0, 0, 0));
         jTableAccountList.setRowHeight(35);
         jTableAccountList.setShowGrid(true);
+        jTableAccountList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAccountListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableAccountList);
         if (jTableAccountList.getColumnModel().getColumnCount() > 0) {
             jTableAccountList.getColumnModel().getColumn(0).setPreferredWidth(3);
@@ -607,34 +659,34 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelTableLayout = new javax.swing.GroupLayout(jPanelTable);
+        jPanelTable.setLayout(jPanelTableLayout);
+        jPanelTableLayout.setHorizontalGroup(
+            jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTableLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1364, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTableLayout.createSequentialGroup()
                     .addContainerGap(1161, Short.MAX_VALUE)
                     .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(52, 52, 52)))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelTableLayout.setVerticalGroup(
+            jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTableLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addGap(69, 69, 69))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanelTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTableLayout.createSequentialGroup()
                     .addContainerGap(379, Short.MAX_VALUE)
                     .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 
-        jTabbedPane1.addTab("Account List", jPanel3);
+        jTabbedPane1.addTab("Account List", jPanelTable);
 
         jTable1.setBackground(new java.awt.Color(225, 255, 238));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -690,7 +742,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -705,11 +757,11 @@ public class Dashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextFieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -721,7 +773,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jTextFieldUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -764,16 +816,11 @@ public class Dashboard extends javax.swing.JFrame {
         totalTransaction = jTextFieldTransaction.getText();
        
         if(costuId.equals("")||name.equals("")||currentBalance.equals("")||phNo.equals("")||address.equals("")||totalTransaction.equals("")){
-            jTextFieldAccountId.setBorder(wrongBorder);
-            jTextFieldBalance.setBorder(wrongBorder);
-            jTextFieldAddress.setBorder(wrongBorder);
-            jTextFieldFullName.setBorder(wrongBorder);
-            jTextFieldNumber.setBorder(wrongBorder);
-            jTextFieldTransaction.setBorder(wrongBorder);
             JOptionPane.showMessageDialog(this, "Fill all Attributes!");
         }     
+        
         else{
-        if(!isDuplicateId(costuId) && !isDuplicateId(phNo)){
+       if(!isDuplicateId(costuId)){
             DefaultTableModel tableModel = (DefaultTableModel) jTableAccountList.getModel();
             tableModel.addRow(new Object[]{costuId, name,opeaningDate, currentBalance,phNo,address,accType,ewallet,accountStatus,totalTransaction});
              AccountHolder accholders = new AccountHolder();
@@ -789,12 +836,27 @@ public class Dashboard extends javax.swing.JFrame {
             accholders.setTotalTransaction(totalTransaction);
             accHolderList.add(accholders);
             JOptionPane.showMessageDialog(this, "New Account Successfully Added");
-      
+
+            jTextFieldAccountId.setText("");
+            jTextFieldFullName.setText("");
+            jTextFieldBalance.setText("");
+            jTextFieldNumber.setText("");
+            jTextFieldAddress.setText("");
+            jComboBoxAccountType.setSelectedItem("");
+            jComboBoxEwallet.setSelectedItem("");
+            jComboBoxAccountStatus.setSelectedItem("");
+            jTextFieldTransaction.setText("");
+            
+            jTextFieldAccountId.setEditable(false); // seting Editable of the id is false
+            OpeanigDate.setEditable(false);
+            jTextFieldAccountId.setBackground(Color.LIGHT_GRAY); // seting  background color
+            jTextFieldAccountId.setForeground(Color.white);
+            
         }
-        
-        
+
         else{
-            JOptionPane.showMessageDialog(this, "Account Id or phone number  already exists!");
+            JOptionPane.showMessageDialog(this, "ID already exists!");
+            
         }
         }
     }//GEN-LAST:event_jButtonSaveActionPerformed
@@ -807,15 +869,61 @@ public class Dashboard extends javax.swing.JFrame {
     
     
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-        // TODO add your handling code here:
+   tablemod = (DefaultTableModel) jTableAccountList.getModel();
+   if(jTableAccountList.getSelectedRowCount()==1){
+   //if single row is selected then update
+        AccountHolder accholders = new AccountHolder();
+        String id =jTextFieldAccountId.getText();
+        String Name =jTextFieldFullName.getText();
+        String openDate = OpeanigDate.getText();
+        String balance = jTextFieldBalance.getText();
+        String number = jTextFieldNumber.getText();
+        String Address = jTextFieldAddress.getText();
+        String AccType = (String) jComboBoxAccountType.getSelectedItem();
+        String eWallet = (String) jComboBoxEwallet.getSelectedItem();
+        String AccStatus = (String) jComboBoxAccountStatus.getSelectedItem();
+        String transaction = jTextFieldTransaction.getText();
+        accHolderList.add(accholders);
         
+        //set updated row in table
+        tablemod.setValueAt(id,jTableAccountList.getSelectedRow() , 0);
+        tablemod.setValueAt(Name,jTableAccountList.getSelectedRow() , 1);
+        tablemod.setValueAt(openDate,jTableAccountList.getSelectedRow() , 2);
+        tablemod.setValueAt(balance,jTableAccountList.getSelectedRow() , 3);
+        tablemod.setValueAt(number,jTableAccountList.getSelectedRow() , 4);
+        tablemod.setValueAt(Address,jTableAccountList.getSelectedRow() , 5);
+        tablemod.setValueAt(AccType,jTableAccountList.getSelectedRow() , 6);
+        tablemod.setValueAt(eWallet,jTableAccountList.getSelectedRow() , 7);
+        tablemod.setValueAt(AccStatus,jTableAccountList.getSelectedRow() , 8);
+        tablemod.setValueAt(transaction,jTableAccountList.getSelectedRow() , 9);
+        JOptionPane.showMessageDialog(this, "Account Successfully Updated");
         
+   }
+   else {
+   if(jTableAccountList.getSelectedRowCount()==0){
+       JOptionPane.showMessageDialog(this, "Table is empty! Add Account to the Table");
+       jPanelAddAccount.setVisible(true);
+            jTextFieldAccountId.setText("");
+            jTextFieldFullName.setText("");
+            jTextFieldBalance.setText("");
+            jTextFieldNumber.setText("");
+            jTextFieldAddress.setText("");
+            jComboBoxAccountType.setSelectedItem("");
+            jComboBoxEwallet.setSelectedItem("");
+            jComboBoxAccountStatus.setSelectedItem("");
+            jTextFieldTransaction.setText("");
+            jTextFieldAccountId.setEditable(false);
+   }
+   else{
+   JOptionPane.showMessageDialog(this, "Select atleast one Row to Update");
+   }
+   }
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
 
          //getting jtable model first
-        DefaultTableModel tablemod = (DefaultTableModel) jTableAccountList.getModel();
+        tablemod = (DefaultTableModel) jTableAccountList.getModel();
         
         //Now for deleting row in the table;
         if(jTableAccountList.getSelectedRowCount()==1){
@@ -827,15 +935,19 @@ public class Dashboard extends javax.swing.JFrame {
                 //if table is emplty then show this message
             JOptionPane.showMessageDialog(this, "Table is empty");
             }
+            
             else{
             //if table is not empty but not selected or many data selected 
-            JOptionPane.showMessageDialog(this, "Select atleast one Row to delete");
+            JOptionPane.showMessageDialog(this, "Table is Empty. Add account");
+            
             }
         }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jTextFieldUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUserNameActionPerformed
         // TODO add your handling code here:
+       
+        
     }//GEN-LAST:event_jTextFieldUserNameActionPerformed
 
     private void jTextFieldAddressKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAddressKeyPressed
@@ -882,7 +994,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void jTextFieldNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNumberKeyReleased
 //        // TODO add your handling code here:
         String mobileNum = jTextFieldNumber.getText();
-        if(mobileNum.matches("^[0-9]*$")&&mobileNum.length()==10&&mobileNum.startsWith("98")){
+        if(mobileNum.matches("^[0-9]*$")&&mobileNum.length()==10&&mobileNum.startsWith("9848")){
         jTextFieldNumber.setBorder(correctBorder);
         jLabelMessage.setText("Go Ahead");
          jLabelMessage.setForeground(Color.green);
@@ -1035,7 +1147,63 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextFieldTransactionKeyPressed
 
-    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jTextFieldAccountId.setEditable(true);
+        jTextFieldBalance.setEditable(true);
+        jTextFieldAddress.setEditable(true);
+        jComboBoxEwallet.setEditable(true);
+        jTextFieldFullName.setEditable(true);
+        jTextFieldNumber.setEditable(true);
+        jComboBoxAccountType.setEditable(true);
+        jComboBoxAccountStatus.setEditable(true);
+        OpeanigDate.setEditable(true);
+        jTextFieldTransaction.setEditable(true);
+        OpeanigDate.setEditable(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+        // TODO add your handling code here:
+        tablemod = (DefaultTableModel) jTableAccountList.getModel();
+        try{}
+        catch(Exception e){
+        
+        }
+        
+    }//GEN-LAST:event_jButtonSearchActionPerformed
+
+    private void jTableAccountListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAccountListMouseClicked
+        // TODO add your handling code here:
+        
+        tablemod = (DefaultTableModel) jTableAccountList.getModel();
+        String tblId = tablemod.getValueAt(jTableAccountList.getSelectedRow(),0).toString();
+        String tblName = tablemod.getValueAt(jTableAccountList.getSelectedRow(),1).toString();
+        String tblOpenDate = tablemod.getValueAt(jTableAccountList.getSelectedRow(),2).toString();
+        String tblCurrentBalance = tablemod.getValueAt(jTableAccountList.getSelectedRow(),3).toString();
+        String tblPhNo = tablemod.getValueAt(jTableAccountList.getSelectedRow(),4).toString();
+        String tblAddress = tablemod.getValueAt(jTableAccountList.getSelectedRow(),5).toString();
+        String tblAccType = tablemod.getValueAt(jTableAccountList.getSelectedRow(),6).toString();
+        String tblEwallet = tablemod.getValueAt(jTableAccountList.getSelectedRow(),7).toString();
+        String tblAccStatus = tablemod.getValueAt(jTableAccountList.getSelectedRow(),8).toString();
+        String tblTotalTrancation = tablemod.getValueAt(jTableAccountList.getSelectedRow(),9).toString();
+        jPanelAddAccount.setVisible(true); // when the row is selected then its nevigate to j panel
+        jPanelTable.setVisible(false);
+        //Now data set to Textfields
+        jTextFieldAccountId.setText(tblId);
+        jTextFieldFullName.setText(tblName);
+        OpeanigDate.setText(tblOpenDate);
+        jTextFieldBalance.setText(tblCurrentBalance);
+        jTextFieldNumber.setText(tblPhNo);
+        jTextFieldAddress.setText(tblAddress);
+        jComboBoxAccountType.setSelectedItem(tblAccType);
+        jComboBoxEwallet.setSelectedItem(tblEwallet);
+         jComboBoxAccountStatus.setSelectedItem(tblAccStatus);
+        jTextFieldTransaction.setText(tblTotalTrancation);
+        
+        
+    }//GEN-LAST:event_jTableAccountListMouseClicked
+
+  
     private boolean isDuplicateId(String key){
         int rowCount = jTableAccountList.getRowCount();
         
@@ -1051,7 +1219,7 @@ public class Dashboard extends javax.swing.JFrame {
         
          
          int row = jTableAccountList.getRowCount();    
-        for(int i = 0; i < row; i++){
+         for(int i = 0; i < row; i++){
             AccountHolder accholders = new AccountHolder();
             accholders.setAccountId(jTableAccountList.getValueAt(i, 0).toString());
             accholders.setName(jTableAccountList.getValueAt(i, 1).toString());
@@ -1129,13 +1297,14 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField OpeanigDate;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxAccountStatus;
     private javax.swing.JComboBox<String> jComboBoxAccountType;
@@ -1156,6 +1325,9 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1165,11 +1337,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelMessage;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanelAddAccount;
+    private javax.swing.JPanel jPanelTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
